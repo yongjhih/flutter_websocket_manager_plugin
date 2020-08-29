@@ -1,5 +1,9 @@
 # Websocket Manager
 
+<p align="left">
+  <a href="https://pub.dev/packages/websocket_manager"><img alt="pub version" src="https://img.shields.io/badge/pub-0.2.2-orange"></a>
+</p>
+
 A Flutter plugin for Android and iOS supports websockets. This plugin is based on two different native libraries [Starscream](https://github.com/daltoniam/Starscream) for iOS and [okHttp](https://medium.com/@ssaurel/learn-to-use-websockets-on-android-with-okhttp-ba5f00aea988) for Android.
 
 This plugin was created due to our necessity to maintain a WebSocket connection active in background while [Flutter's WebSocket](https://flutter.dev/docs/cookbook/networking/web-sockets) from cookbook doesn't keep alive while screen is locked or the application was in background.
@@ -10,7 +14,7 @@ This plugin was created due to our necessity to maintain a WebSocket connection 
 
 ## How to install
 
-### Android
+### Android (optional)
 
 **You only need this configuration if your server doesn't have SSL/TLS**
 
@@ -68,7 +72,17 @@ socket.onMessage((dynamic message) {
 socket.connect();
 ````
 
+## Contributing
+See the Contributing guide for details on contributing to this project.
+
 ## Credits
 
-- Android: [okHttp](https://medium.com/@ssaurel/learn-to-use-websockets-on-android-with-okhttp-ba5f00aea988) created by [Square](https://github.com/square)
+- Android: [okHttp](hthttps://github.com/square/okhttp/) created by [Square](https://github.com/square)
 - iOS: [Starscream](https://github.com/daltoniam/Starscream) created by [daltoniam](https://github.com/daltoniam)
+
+
+## Help Maintenance
+
+I've been maintaining quite many repos these days and burning out slowly. If you could help me cheer up, buying me a cup of coffee will make my life really happy and get much energy out of it.
+
+[![Paypal](https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Y8SGQV7EBHZBC&source=url)
