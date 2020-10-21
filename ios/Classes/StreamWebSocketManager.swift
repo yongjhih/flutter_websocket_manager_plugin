@@ -5,7 +5,7 @@
 //  Created by Luan Almeida on 15/11/19.
 //
 
-import Starscream
+import StarscreamTrust
 
 @available(iOS 9.0, *)
 class StreamWebSocketManager: NSObject, WebSocketDelegate {
