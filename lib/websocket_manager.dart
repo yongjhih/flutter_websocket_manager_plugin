@@ -15,12 +15,28 @@ const String _METHOD_CHANNEL_TEST_ECHO = 'echoTest';
 
 /// Provides an easy way to create native websocket connection.
 class WebsocketManager {
-  WebsocketManager(this.url, [this.header]) {
+  WebsocketManager(this.url, {
+		  this.header,
+		  this.enableCompression,
+		  this.disableSSL,
+		  this.overrideTrustHostname,
+		  this.desiredTrustHostname,
+		  this.certificate,
+		  this.usePublicKeys,
+		  this.enableRetries,
+		  }) {
     _create();
   }
 
   final String url;
   final Map<String, String> header;
+  final bool enableCompression;
+  final bool disableSSL;
+  final bool overrideTrustHostname;
+  final String desiredTrustHostname;
+  final String certificate;
+  final bool usePublicKeys;
+  final bool enableRetries;
 
   static const MethodChannel _channel = MethodChannel(_PLUGIN_NAME);
   static const EventChannel _eventChannelMessage =
@@ -58,6 +74,13 @@ class WebsocketManager {
         .invokeMethod<dynamic>(_METHOD_CHANNEL_CREATE, <String, dynamic>{
       'url': url,
       'header': header,
+      'enableCompression': enableCompression,
+      'disableSSL': disableSSL,
+      'overrideTrustHostname': overrideTrustHostname,
+      'desiredTrustHostname': desiredTrustHostname,
+      'certificate': certificate,
+      'usePublicKeys': usePublicKeys,
+      'enableRetries': enableRetries,
     });
     _onMessage();
     _onClose();

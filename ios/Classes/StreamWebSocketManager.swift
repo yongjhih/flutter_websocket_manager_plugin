@@ -6,6 +6,18 @@
 //
 
 import StarscreamTrust
+import Foundation
+
+extension String {
+    func fromBase64() -> Data? {
+        if let decodedData = Data(base64Encoded: self, options: .ignoreUnknownCharacters) {
+            return decodedData
+        }
+
+        return nil
+    }
+}
+
 
 @available(iOS 9.0, *)
 class StreamWebSocketManager: NSObject, WebSocketDelegate {
@@ -30,7 +42,16 @@ class StreamWebSocketManager: NSObject, WebSocketDelegate {
 
     func areUpdateEnabled() -> Bool { return updatesEnabled }
 
-    func create(url: String, header: [String: String]?, enableCompression _: Bool?, disableSSL _: Bool?, enableRetries: Bool) {
+    func create(
+		    url: String,
+		    header: [String: String]?,
+		    enableCompression: Bool?,
+		    disableSSL: Bool?,
+		    overrideTrustHostname: Bool?,
+		    desiredTrustHostname: String?,
+		    certificate: String?,
+		    usePublicKeys: Bool?,
+		    enableRetries: Bool) {
         var request = URLRequest(url: URL(string: url)!)
         if header != nil {
             for key in header!.keys {
@@ -41,16 +62,27 @@ class StreamWebSocketManager: NSObject, WebSocketDelegate {
         print(request.allHTTPHeaderFields as Any)
         ws = WebSocket(request: request)
         ws?.delegate = self
-//        if(enableCompression != nil) {
-//            ws?.enableCompression = enableCompression!
-//        } else {
-//            ws?.enableCompression = true
-//        }
-//        if(disableSSL != nil) {
-//            ws?.disableSSLCertValidation = disableSSL!
-//        } else {
-//            ws?.disableSSLCertValidation = false
-//        }
+        if (enableCompression != nil) {
+            ws?.enableCompression = enableCompression!
+        }
+        if (disableSSL != nil) {
+            ws?.disableSSLCertValidation = disableSSL!
+        }
+        if (enableCompression != nil) {
+            ws?.enableCompression = enableCompression!
+        }
+        if (overrideTrustHostname != nil) {
+            ws?.overrideTrustHostname = overrideTrustHostname!
+        }
+        if (desiredTrustHostname != nil) {
+            ws?.desiredTrustHostname = desiredTrustHostname!
+        }
+        if (certificate != nil) {
+            var data = certificate!.fromBase64()
+            if (data != nil) {
+                ws?.security = SSLSecurity(certs: [SSLCert(data: data!)], usePublicKeys: usePublicKeys ?? false)
+            }
+        }
         onConnect()
         onClose()
     }

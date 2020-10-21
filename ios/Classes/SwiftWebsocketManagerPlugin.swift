@@ -45,8 +45,17 @@ public class SwiftWebsocketManagerPlugin: NSObject, FlutterPlugin {
             if enableRetries == nil {
                 enableRetries = true
             }
-            streamWebSocketManager.create(url: url, header: header, enableCompression: arguments["enableCompression"] as? Bool, disableSSL: arguments["disableSSL"] as? Bool,
-                                          enableRetries: enableRetries!)
+            streamWebSocketManager.create(
+			    url: url,
+			    header: header,
+			    enableCompression: arguments["enableCompression"] as? Bool,
+			    disableSSL: arguments["disableSSL"] as? Bool,
+			    overrideTrustHostname: arguments["overrideTrustHostname"] as? Bool,
+			    desiredTrustHostname: arguments["desiredTrustHostname"] as? String,
+			    certificate: arguments["certificate"] as? String,
+			    usePublicKeys: arguments["usePublicKeys"] as? Bool,
+			    enableRetries: enableRetries!
+			    )
 
             streamWebSocketManager.closeCallback = closeHandler
             streamWebSocketManager.onClose()
